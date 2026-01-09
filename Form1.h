@@ -648,26 +648,25 @@ namespace CppCLRWinFormsProject {
 		}
 #pragma endregion
 
-		// ==================== EVENT HANDLERS ====================
+	 
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		try
 		{
-			// Конвертация из managed в native строки
+			 
 			std::string vardas = msclr::interop::marshal_as<std::string>(textBox1->Text);
 			std::string pavarde = msclr::interop::marshal_as<std::string>(textBox2->Text);
 			std::string ndStr = msclr::interop::marshal_as<std::string>(textBox3->Text);
 			std::string egzStr = msclr::interop::marshal_as<std::string>(textBox4->Text);
 
-			// Валидация имени и фамилии
+			 
 			std::string error;
 			if (!ValidateStudentInput(vardas, pavarde, error)) {
 				MessageBox::Show(gcnew System::String(error.c_str()));
 				return;
 			}
-
-			// Парсинг экзамена
+ 
 			int egz = 0;
 			if (!egzStr.empty()) {
 				try {
@@ -683,22 +682,22 @@ namespace CppCLRWinFormsProject {
 				}
 			}
 
-			// Парсинг ND
+			 
 			std::vector<int> paz;
 			if (!ParseND(ndStr, paz, error)) {
 				MessageBox::Show(gcnew System::String(error.c_str()));
 				return;
 			}
 
-			// Расчет финальных оценок
+			 
 			FinalGrades grades = CalculateFinalGrades(paz, egz);
 
-			// Запись в файл
+			 
 			std::string filePath = MakePathInResults("kursiokai.txt");
 			WriteStudentToFile(filePath, pavarde, vardas, grades.vidurkis, grades.mediana);
 
 
-			// Очистка полей
+			 
 			textBox1->Clear();
 			textBox2->Clear();
 			textBox3->Clear();
@@ -724,7 +723,7 @@ namespace CppCLRWinFormsProject {
 				return;
 			}
 
-			// Генерация файла с красивым форматированием
+			 
 			std::string outPath = MakePathInResults("sugeneruoti.txt");
 			GeneruotiSugeneruoti(outPath, N, nd_kiek);
 
@@ -761,7 +760,7 @@ namespace CppCLRWinFormsProject {
 			RunStrategy(currentContainer, stratIndex, inputFile, genTime, stratTime, N, nd);
 
 
-			// Показ результатов
+			 
 			System::String^ msg =
 				"Sugeneruota: " + N.ToString() + " studentu, ND: " + nd.ToString() + "\n"
 				"Generavimo laikas: " + gcnew System::String(std::to_string(genTime).c_str()) + " s\n"
@@ -818,7 +817,7 @@ namespace CppCLRWinFormsProject {
 			listBox1->Items->Clear();
 	}
 
-		   // ==================== MENU HANDLERS ====================
+		   
 
 	private: System::Void MenuIvesti_Click(System::Object^ sender, System::EventArgs^ e)
 	{
@@ -908,7 +907,7 @@ namespace CppCLRWinFormsProject {
 		panel1->Hide();
 	}
 
-		   // ==================== CLOSE BUTTON HANDLERS ====================
+		    
 
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
 	{
